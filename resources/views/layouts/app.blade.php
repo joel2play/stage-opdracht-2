@@ -32,9 +32,18 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @auth
                     <ul class="navbar-nav mr-auto">
-
+                        <a href="{{ route('project.index') }}" class="mx-2">
+                            Projects
+                        </a>
+                        @can ('seeAdmin', App\User::class)
+                        <a href="{{ route('admin') }}" class="mx-2">
+                            Admin
+                        </a>
+                        @endcan
                     </ul>
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -76,5 +85,6 @@
             @yield('content')
         </main>
     </div>
+    <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </body>
 </html>
