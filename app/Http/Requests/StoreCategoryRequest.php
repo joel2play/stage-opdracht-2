@@ -24,13 +24,8 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        
         return [
-            Category::create([
-                request()->validate([
-                    'name' => 'required|min:3|max:255'
-                ])
-            ])
+            'name' => 'required|min:3|max:255'
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 @section ('right')
 <div class="bg-white rounded border p-4">
-    <form action="{{ route('category.store') }}" method="post">
+    <form action="{{ route('user.store') }}" method="post">
             @csrf
 
             <h3 class="my-5 text-dark">

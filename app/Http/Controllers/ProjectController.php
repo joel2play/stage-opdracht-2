@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectUploadRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Image;
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -46,6 +49,7 @@ class ProjectController extends Controller
             'images' => 'required',
             'images.*' => 'image',
         ]);
+        $validated['project_leader_id'] = Auth::user()->id;
 
         $project = Project::create($validated);
 
@@ -66,7 +70,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('project.show', compact('project'));
     }
 
     /**
@@ -77,7 +81,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('project.edit', compact('project'));
     }
 
     /**
@@ -87,9 +91,16 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->name = $request->input('name');
+        $project->start_date = $request->input('start_date');
+        $project->end_date = $request->input('end_date');
+        $project->description = $request->input('description');
+
+        $project->save();
+
+        return redirect(route('project.index'));
     }
 
     /**
@@ -100,6 +111,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        foreach ($project->images as $image){
+            Storage::delete($image->file_name);
+            $image->delete();
+        }
+        $project->delete();
+
+        return redirect(route('projects.index'));
     }
 }

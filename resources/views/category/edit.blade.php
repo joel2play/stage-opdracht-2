@@ -5,7 +5,6 @@
     <form action="{{ route('category.update', $category) }}" method="post">
         @csrf
         @method ('put')
-
         <div class="form-group">
             <label>Name</label>
             <input type="text" value="{{ $category->name }}" class="form-control @error('name') is-invalid @enderror" name="name">

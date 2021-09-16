@@ -15,7 +15,11 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('category.index') }}">Category</a>
+                            <a href="{{ route('category.index') }}">Categories</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('project.index') }}">Projects</a>
                         </li>
                     </ul>
                 </div>

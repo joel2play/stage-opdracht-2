@@ -38,7 +38,14 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        return redirect(route('users.index'));
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'role_id' => $request->input('role_id'),
+        ]);
+
+        return redirect(route('user.index'));
     }
 
     /**
@@ -93,6 +100,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return back();
     }
 }

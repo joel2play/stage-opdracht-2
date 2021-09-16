@@ -1,5 +1,6 @@
 <?php
 
+use App\Project;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', function(){ return view('index')->with('projects', Project::all()); });
 
 Route::get('/admin', function (){
     return redirect(route('category.index'));
@@ -47,7 +48,7 @@ Route::get('/projects/edit/{project}', 'ProjectController@edit')
     ->name('project.edit')
     ->middleware(['auth']);
 
-Route::put('/projects/update', 'ProjectController@update')
+Route::put('/projects/update/{project}', 'ProjectController@update')
     ->name('project.update')
     ->middleware(['auth']);
 

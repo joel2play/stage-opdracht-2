@@ -37,6 +37,10 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        Category::create([
+            'name' => $request->input('name')
+        ]);
+        
         return redirect(route('category.index'));
     }
 
@@ -48,7 +52,6 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $category = Category::find($category->id);
         return view('category.edit', compact('category'));
     }
 

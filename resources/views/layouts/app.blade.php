@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     @auth
                     <ul class="navbar-nav mr-auto">
-                        <a href="{{ route('project.index') }}" class="mx-2">
+                        <a href="/home" class="mx-2">
                             Projects
                         </a>
                         @can ('seeAdmin', App\User::class)
