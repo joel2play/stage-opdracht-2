@@ -2,7 +2,10 @@
 
 @section ('right')
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4>
+            Projects
+        </h4>
         <a href="{{ route('project.create') }}" class="btn btn-success">New Project</a>
     </div>
     <div class="bg-white rounded border p-4 my-4">

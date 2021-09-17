@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProjectUploadRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Image;
 use App\Project;
 use App\Project_User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -122,9 +122,7 @@ class ProjectController extends Controller
     }
 
     public function join (Project $project){
-        Project_User::create([
-            'user_id' => Auth::user()->id,
-            'project_id' => $project->id
-        ]);
+        $project->users()->attach(Auth::user()->id);
+        return back();
     }
 }

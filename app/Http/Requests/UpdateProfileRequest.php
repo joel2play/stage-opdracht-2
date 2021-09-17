@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreUserRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('store', \App\User::class);
+        return true;
     }
 
     /**
@@ -27,9 +25,8 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role_id' => 'required'
+            'email' => 'required',
+            'profile_picture' => 'image'
         ];
     }
 }

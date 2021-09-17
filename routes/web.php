@@ -1,7 +1,9 @@
 <?php
 
 use App\Project;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function(){ return view('index')->with('projects', Project::all()); });
+Route::get('/home', function(){ return view('index')->with('projects', Project::all()); })->name('home')
+    ->middleware('auth');
 
 Route::get('/admin', function (){
     return redirect(route('category.index'));
@@ -120,6 +123,28 @@ Route::put('/users/update/{user}', 'UserController@update')
 Route::delete('/users/delete/{user}', 'UserController@destroy')
     ->name('user.delete')
     ->middleware(['admin']);
+
+
+// Profile routes
+Route::get('/profile', 'ProfileController@index')
+    ->name('profile.index')
+    ->middleware(['auth']);
+
+Route::get('/profile/{user}', 'ProfileController@show')
+    ->name('profile.show')
+    ->middleware(['auth']);
+
+Route::get('/profile/edit/{user}', 'ProfileController@edit')
+    ->name('profile.edit')
+    ->middleware(['auth', 'can:edit,user']);
+
+Route::get('/profile/{user}/projects', 'ProfileController@projects')
+    ->name('profile.projects')
+    ->middleware(['auth']);
+
+Route::put('/profile/update/{user}', 'ProfileController@update')
+    ->name('profile.update')
+    ->middleware(['auth', 'can:update,user']);
 
 Auth::routes();
 

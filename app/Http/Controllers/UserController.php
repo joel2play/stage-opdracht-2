@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -41,7 +42,7 @@ class UserController extends Controller
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
+            'password' => Hash::make($request->input('password')),
             'role_id' => $request->input('role_id'),
         ]);
 

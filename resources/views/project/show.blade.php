@@ -40,12 +40,19 @@
                             End date: {{ $project->end_date }}
                         </p>
 
-                        <form action="{{ route('project.join', $project) }}" method="post">
-                            @csrf
-                            <button class="btn btn-success">
-                                Meld je aan!
+                        @can('join', $project)
+                            <form action="{{ route('project.join', $project) }}" method="post">
+                                @csrf
+                                <button class="btn btn-success">
+                                    Join this Project
+                                </button>
+                            </form>
+                        @else
+                            <button class="btn btn-secondary">
+                                You already joined this project
                             </button>
-                        </form>
+                        @endcan
+                        
                         
 
                     </div>
@@ -63,20 +70,27 @@
                     </h3>
                 </div>
                 <div class="row overflow-auto pt-5">
-                    @foreach ($project->users as $user)
-                        <div class="col-3">
-                            @if ($user->profile_picture == null)
-                                <img src="{{ asset('images/profiles/default.png') }}" class="w-100 rounded-circle">
-                            @endif
-                            <p class="text-center">
-                                <a href="#">
-                                    {{ $user->name }}
-                                </a>
-                            </p>
-                        </div>
-                        
-                            
-                    @endforeach
+                    @if($project->users->isEmpty())
+                        <p class="text-center w-100">
+                            No users have joined yet...
+                        </p>
+                    @else
+                        @foreach ($project->users as $user)
+                            <div class="col-3">
+                                @if ($user->profile_picture == null)
+                                    <img src="{{ asset('images/profiles/default.png') }}" class="w-100 rounded-circle">
+                                @else
+                                    <img src="{{ asset('images/'. $user->profile_picture) }}" class="w-100 rounded-circle">
+                                @endif
+                                <p class="text-center">
+                                    <a href="{{ route('profile.show', $user) }}">
+                                        {{ $user->name }}
+                                    </a>
+                                </p>
+                            </div>
+                        @endforeach
+                    @endif
+                    
                 </div>
             </div>
         </div>

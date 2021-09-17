@@ -2,7 +2,10 @@
 
 @section ('right')
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4>
+            Users
+        </h4>
         <a href="{{ route('user.create') }}" class="btn btn-success">New User</a>
     </div>
     <div class="bg-white rounded border p-4 my-4">
@@ -25,7 +28,9 @@
                 @foreach ($users as $user)
                     <tr>
                         <td class="pr-5">
-                            {{ $user->name }}
+                            <a href="{{ route('profile.show', $user) }}">
+                                {{ $user->name }}
+                            </a>
                         </td>
                         
                         <td class="pr-5">
