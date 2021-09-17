@@ -48,6 +48,24 @@
                     </span>
                 @enderror
             </div>
+            
+            <div class="py-5">
+            <h5>
+                Categories
+            </h5>
+            
+            <div class="row">
+                
+                @foreach (\App\Category::all() as $categorie)
+                    <div class="col-2 form-group">
+                        <input type="checkbox" name="{{ $categorie->id }}" id="{{ $categorie->id }}">
+                        <label for="{{ $categorie->id }}">{{ $categorie->name }}</label>
+                    </div>
+
+                @endforeach                
+            </div>
+            </div>
+            
 
             <div class="input-group">
                 <div class="input-group-prepend">

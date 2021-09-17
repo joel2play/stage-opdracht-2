@@ -7,7 +7,7 @@
                 @if ($user->profile_picture == null)
                     <img src="{{ asset('images/profiles/default.png') }}" class="w-100 rounded-circle">
                 @else
-                    <img src="{{ asset('images/'. $user->profile_picture) }}" class="w-100 rounded-circle">
+                    <img src="{{ asset('images/'. $user->profile_picture) }}" class="w-100 h-100 rounded-circle">
                 @endif
             </div>
 

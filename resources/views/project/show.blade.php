@@ -58,7 +58,16 @@
                     </div>
 
                     <div class="col">
-                        {!! $project->description !!}
+                        <div>
+                            {!! $project->description !!}
+                        </div>
+
+                        <div>
+                            <span>Categories:</span>
+                            @foreach ($project->categories as $categorie)
+                                {{ $categorie->name }}    
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

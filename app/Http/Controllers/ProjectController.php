@@ -60,6 +60,13 @@ class ProjectController extends Controller
                 'project_id' => $project->id,   
             ]);
         }
+
+        foreach (\App\Category::all() as $categorie) {
+            if ($request->has($categorie->id)){
+                $project->categories()->attach($categorie->id);
+            }
+        }
+
         return redirect(route('project.index'));
     }
 
