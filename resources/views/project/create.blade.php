@@ -11,7 +11,7 @@
 
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+                <input type="text" name="name" required class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <label>Start Date</label>
-                <input type="date" name="start_date" class="form-control text-center @error('start_date') is-invalid @enderror" style="width: 200px;" value="{{ old('start_date') }}">
+                <input type="date" name="start_date" required class="form-control text-center @error('start_date') is-invalid @enderror" style="width: 200px;" value="{{ old('start_date') }}">
                 @error ('start_date')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
             
             <div class="form-group">
                 <label>End Date</label>
-                <input type="date" name="end_date" class="form-control text-center @error('end_date') is-invalid @enderror" style="width: 200px;" value="{{ old('end_date') }}">
+                <input type="date" name="end_date" required class="form-control text-center @error('end_date') is-invalid @enderror" style="width: 200px;" value="{{ old('end_date') }}">
                 @error ('end_date')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" class="ckeditor" cols="30" rows="10"></textarea>
+                <textarea name="description" required class="ckeditor" cols="30" rows="10"></textarea>
                 @error ('description')
                     <span class="" role="alert">
                         <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
 
                 <div class="custom-file">
                     <label class="custom-file-label">Picture(s)</label>
-                    <input type="file" name="images[]" class="custom-file-input @error('images') is-invalid @enderror" multiple>
+                    <input type="file" required name="images[]" class="custom-file-input @error('images') is-invalid @enderror" multiple>
                 </div>
             </div>
             @error ('images')

@@ -56,6 +56,10 @@ Route::delete('/projects/delete/{project}', 'ProjectController@destroy')
     ->name('project.delete')
     ->middleware(['auth']);
 
+Route::post('/project/{project}/join', 'ProjectController@join')
+    ->name('project.join')
+    ->middleware(['auth']);
+
 
 
 // Category routes
@@ -88,7 +92,7 @@ Route::delete('/categories/delete/{category}', 'CategoryController@destroy')
     ->middleware(['admin']);
 
 
-
+// User routes
 Route::get('/users', 'UserController@index')
     ->name('user.index')
     ->middleware(['admin']);

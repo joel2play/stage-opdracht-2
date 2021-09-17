@@ -34,11 +34,11 @@
                     <!-- Left Side Of Navbar -->
                     @auth
                     <ul class="navbar-nav mr-auto">
-                        <a href="/home" class="mx-2">
+                        <a href="/home" class="mx-2 nav-link">
                             Projects
                         </a>
                         @can ('seeAdmin', App\User::class)
-                        <a href="{{ route('admin') }}" class="mx-2">
+                        <a href="{{ route('admin') }}" class="mx-2 nav-link">
                             Admin
                         </a>
                         @endcan
@@ -81,7 +81,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="min-height: 100vh; background-color: #e9ecef">
             @yield('content')
         </main>
     </div>
