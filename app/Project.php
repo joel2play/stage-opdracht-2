@@ -25,4 +25,8 @@ class Project extends Model
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
+
+    public function project_leader() {
+        return User::find($this->project_leader_id);
+    }
 }

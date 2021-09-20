@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Image;
 use App\Project;
-use App\Project_User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -20,7 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::all()->sortByDesc('created_at');
         return view('project.index', compact('projects'));
     }
 
@@ -50,9 +48,12 @@ class ProjectController extends Controller
             'images' => 'required',
             'images.*' => 'image',
         ]);
+
         $validated['project_leader_id'] = Auth::user()->id;
 
         $project = Project::create($validated);
+
+        $project->users()->attach(Auth::user());
 
         foreach ($request->images as $image){
             Image::create([
@@ -67,7 +68,7 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect(route('project.index'));
+        return redirect(route('home'));
     }
 
     /**
@@ -107,6 +108,14 @@ class ProjectController extends Controller
         $project->description = $request->input('description');
 
         $project->save();
+
+        $project->categories()->detach();
+
+        foreach (\App\Category::all() as $categorie) {
+            if ($request->has($categorie->id)){
+                $project->categories()->attach($categorie->id);
+            }
+        }
 
         return redirect(route('project.index'));
     }

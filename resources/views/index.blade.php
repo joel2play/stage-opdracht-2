@@ -16,8 +16,8 @@
         <div class="row justify-content-between">
             @foreach ($projects as $project)
                 <div class="card col-3 p-0 mx-4 mt-5">
-                    <img class="card-img-top" src="{{ asset('images/' . $project->images->first()->file_name) }}">
-                    <div class="card-body">
+                    <img class="card-img-top h-75" src="{{ asset('images/' . $project->images->first()->file_name) }}">
+                    <div class="card-body h-25">
                         <a href="{{ route('project.show', $project) }}">
                             <h3>
                                 {{ $project->name }}

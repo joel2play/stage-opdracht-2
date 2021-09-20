@@ -36,7 +36,7 @@
                         </td>
 
                         <td class="pr-5">
-                            {{ \App\User::find($project->project_leader_id)->name }}
+                            {{ $project->project_leader()->name }}
                         </td>
 
                         <td class="pr-5">

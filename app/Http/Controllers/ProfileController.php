@@ -27,8 +27,8 @@ class ProfileController extends Controller
     }
 
     public function projects(User $user){
-        $projects = $user->projects;
-        return view('profile.projects', compact('projects'))->with('user', $user);
+        $projects = $user->projects->where('project_leader_id', $user->id);
+        return view('profile.project.index', compact('projects'))->with('user', $user);
     }
 
     public function update(UpdateProfileRequest $request, User $user) {

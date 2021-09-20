@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" required class="ckeditor" cols="30" rows="10"></textarea>
+                <textarea name="description" required class="ckeditor" cols="30" rows="10">{{ old('description') }}</textarea>
                 @error ('description')
                     <span class="" role="alert">
                         <strong>{{ $message }}</strong>
@@ -50,20 +50,18 @@
             </div>
             
             <div class="py-5">
-            <h5>
-                Categories
-            </h5>
-            
-            <div class="row">
+                <h5>
+                    Categories
+                </h5>
                 
-                @foreach (\App\Category::all() as $categorie)
-                    <div class="col-2 form-group">
-                        <input type="checkbox" name="{{ $categorie->id }}" id="{{ $categorie->id }}">
-                        <label for="{{ $categorie->id }}">{{ $categorie->name }}</label>
-                    </div>
-
-                @endforeach                
-            </div>
+                <div class="row">
+                    @foreach (\App\Category::all() as $categorie)
+                        <div class="col-2 form-group">
+                            <input type="checkbox" name="{{ $categorie->id }}" id="{{ $categorie->id }}">
+                            <label for="{{ $categorie->id }}">{{ $categorie->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
             </div>
             
 

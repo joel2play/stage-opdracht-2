@@ -21,7 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function(){ return view('index')->with('projects', Project::all()); })->name('home')
+Route::get('/home', function(){ return view('index')->with('projects', Project::all()->sortByDesc('created_at')); })
+    ->name('home')
     ->middleware('auth');
 
 Route::get('/admin', function (){

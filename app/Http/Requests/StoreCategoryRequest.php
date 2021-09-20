@@ -15,7 +15,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('storeCategory', \App\Category::class);
+        return Auth::user()->can('store', \App\Category::class);
     }
 
     /**

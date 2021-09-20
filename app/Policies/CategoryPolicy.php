@@ -11,9 +11,9 @@ class CategoryPolicy
 {
     use HandlesAuthorization;
     
-    public function store(User $user)
+    public function store(User $auth)
     {
-        return $user->role_id == Role::ADMIN;
+        return $auth->role_id == Role::ADMIN;
     }
 
 

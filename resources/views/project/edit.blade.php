@@ -46,6 +46,21 @@
             @enderror
         </div>
 
+        <div class="py-5">
+            <h5>
+                Categories
+            </h5>
+            
+            <div class="row">
+                @foreach (\App\Category::all() as $category)
+                    <div class="col-2 form-group">
+                        <input type="checkbox" @if ($project->categories->has($category->id)) checked @endif name="{{ $category->id }}" id="{{ $category->id }}">
+                        <label for="{{ $category->id }}">{{ $category->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">Upload</span>
