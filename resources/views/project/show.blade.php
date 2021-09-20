@@ -47,9 +47,12 @@
                             </button>
                         </form>
                     @else
-                        <button class="btn btn-secondary">
-                            You already joined this project
+                    <form action="{{ route('project.leave', $project) }}" method="post">
+                        @csrf
+                        <button class="btn btn-danger">
+                            leave this Project
                         </button>
+                    </form>
                     @endcan
                     
                 </div>

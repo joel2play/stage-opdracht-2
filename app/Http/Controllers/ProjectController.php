@@ -93,6 +93,10 @@ class ProjectController extends Controller
         return view('project.edit', compact('project'));
     }
 
+    public function overview (Project $project) {
+        return view('project.overview', compact('project'))->with('user', Auth::user());
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -139,6 +143,11 @@ class ProjectController extends Controller
 
     public function join (Project $project){
         $project->users()->attach(Auth::user()->id);
+        return back();
+    }
+
+    public function leave (Project $project){
+        $project->users()->detach(Auth::user()->id);
         return back();
     }
 }

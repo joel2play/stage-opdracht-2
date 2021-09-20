@@ -66,7 +66,11 @@ Route::delete('/projects/delete/{project}', 'ProjectController@destroy')
 
 Route::post('/project/{project}/join', 'ProjectController@join')
     ->name('project.join')
-    ->middleware(['auth']);
+    ->middleware(['auth']); 
+
+Route::post('/project/{project}/leave', 'ProjectController@leave')
+    ->name('project.leave')
+    ->middleware(['auth']); 
 
 
 
