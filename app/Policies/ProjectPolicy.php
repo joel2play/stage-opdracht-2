@@ -22,7 +22,9 @@ class ProjectPolicy
     }
 
     public function edit (User $auth, Project $project) {
-        return $auth->role_id == Role::ADMIN || $project->project_leader_id == $auth->id;
+        return true;
+
+        // return $auth->role_id == Role::ADMIN || $project->project_leader_id == $auth->id;
     }
 
     public function delete (User $auth, Project $project) {

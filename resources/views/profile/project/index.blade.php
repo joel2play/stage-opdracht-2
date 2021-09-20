@@ -41,7 +41,7 @@
 
                     @can('edit', $project)
                         <td class="px-2">
-                            <a href="{{ route('project.edit', $project) }}" class="text-primary">Edit</a>
+                            <a href="{{ route('profile.project.edit', $project) }}" class="text-primary">Edit</a>
                         </td>
                     @endcan
 

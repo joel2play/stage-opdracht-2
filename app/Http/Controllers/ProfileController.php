@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
+use App\Project;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,10 +21,11 @@ class ProfileController extends Controller
     }
 
     public function edit(User $user){
-        if(Auth::user()->can('edit', $user)){
-            return view('profile.edit', compact('user'));
-        }
-        return back();
+        return view('profile.edit', compact('user'));
+    }
+
+    public function editProject(Project $project){
+        return view('profile.project.edit', compact('project'))->with('user', Auth::user());
     }
 
     public function projects(User $user){

@@ -143,6 +143,10 @@ Route::get('/profile/{user}/projects', 'ProfileController@projects')
     ->name('profile.projects')
     ->middleware(['auth']);
 
+Route::get('/profile/project/edit/{project}', 'ProfileController@editProject')
+    ->name('profile.project.edit')
+    ->middleware(['auth', 'can:edit,project']);
+
 Route::put('/profile/update/{user}', 'ProfileController@update')
     ->name('profile.update')
     ->middleware(['auth', 'can:update,user']);
