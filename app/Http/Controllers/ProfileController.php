@@ -24,6 +24,10 @@ class ProfileController extends Controller
         return view('profile.edit', compact('user'));
     }
 
+    public function createProject () {
+        return view('profile.project.create')->with('user', Auth::user());
+    }
+
     public function editProject(Project $project){
         return view('profile.project.edit', compact('project'))->with('user', Auth::user());
     }
@@ -37,7 +41,7 @@ class ProfileController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
 
-        if ($user->profile_picture != null && $request->has('profile_picture')){
+        if ($user->profile_picture != 'profiles/default.png' && $user->profile_picture != null && $request->has('profile_picture')){
             Storage::delete($user->profile_picture);
         }
 

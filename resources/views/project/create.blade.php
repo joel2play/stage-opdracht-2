@@ -1,7 +1,7 @@
-@extends ('layouts.app')
+@extends ('layouts.admin')
 
-@section ('content')
-    <div class="container">
+@section ('right')
+    <div class="bg-white rounded border p-4">
         <form action="{{ route('project.store') }}" method="post" enctype="multipart/form-data" class="card p-5">
             @csrf
 
@@ -85,6 +85,5 @@
                 Create Project
             </button>
         </form>
-        
     </div>
 @endsection

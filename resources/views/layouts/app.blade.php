@@ -85,7 +85,7 @@
             </div>
         </nav>
 
-        <main class="py-4" style="min-height: 100vh; background-color: #e9ecef">
+        <main class="py-4" style="min-height: 100vh; background-image: url('{{ asset('images/background/background.png') }}'); background-repeat: no-repeat; background-attachments: none">
             @yield('content')
         </main>
     </div>

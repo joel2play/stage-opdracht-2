@@ -4,11 +4,7 @@
     <div class="container">
         <div class="bg-white row mb-5">
             <div class="col-3 m-4">
-                @if ($user->profile_picture == null)
-                    <img src="{{ asset('images/profiles/default.png') }}" class="w-100 rounded-circle">
-                @else
                     <img src="{{ asset('images/'. $user->profile_picture) }}" class="w-100 h-100 rounded-circle">
-                @endif
             </div>
 
             <div class="col my-3 p-3 border-left">
@@ -32,9 +28,13 @@
         </div>
 
         <div class="bg-white p-5 mb-5" style="margin-right: -15px; margin-left: -15px;">
-            <h4>
-                Projects
-            </h4>
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>
+                    Projects
+                </h4>
+                
+                <a href="{{ route('profile.project.create') }}" class="btn btn-success">New Project</a>
+            </div>
         
             <div class="row">
                 @foreach ($user->projects as $project)

@@ -18,12 +18,16 @@ class Project extends Model
         return $this->hasMany(Image::class);
     }
 
-    public function users(){
+    public function users (){
         return $this->belongsToMany(User::class);
     }
 
-    public function categories(){
+    public function categories (){
         return $this->belongsToMany(Category::class);
+    }
+
+    public function comments () {
+        return $this->hasMany(Comment::class);
     }
 
     public function project_leader() {

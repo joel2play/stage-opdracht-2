@@ -26,7 +26,7 @@ Route::get('/home', function(){ return view('index')->with('projects', Project::
     ->middleware('auth');
 
 Route::get('/admin', function (){
-    return redirect(route('category.index'));
+    return redirect(route('user.index'));
 })  ->name('admin')
     ->middleware(['admin']);
 
@@ -38,7 +38,7 @@ Route::get('/projects', 'ProjectController@index')
 
 Route::get('/projects/create', 'ProjectController@create')
     ->name('project.create')
-    ->middleware(['auth']);
+    ->middleware(['admin']);
 
 Route::post('/projects/store', 'ProjectController@store')
     ->name('project.store')
@@ -47,6 +47,10 @@ Route::post('/projects/store', 'ProjectController@store')
 Route::get('/projects/show/{project}', 'ProjectController@show')
     ->name('project.show')
     ->middleware(['auth']);
+
+Route::get('/project/overview/{project}', 'ProjectController@overview')
+    ->name('project.overview')
+    ->middleware(['auth', 'can:edit,project']);
 
 Route::get('/projects/edit/{project}', 'ProjectController@edit')
     ->name('project.edit')
@@ -58,7 +62,7 @@ Route::put('/projects/update/{project}', 'ProjectController@update')
 
 Route::delete('/projects/delete/{project}', 'ProjectController@destroy')
     ->name('project.delete')
-    ->middleware(['auth']);
+    ->middleware(['auth', 'can:delete,project']);
 
 Route::post('/project/{project}/join', 'ProjectController@join')
     ->name('project.join')
@@ -143,6 +147,10 @@ Route::get('/profile/{user}/projects', 'ProfileController@projects')
     ->name('profile.projects')
     ->middleware(['auth']);
 
+Route::get('/profile/project/create', 'ProfileController@createProject')
+    ->name('profile.project.create')
+    ->middleware(['auth']);
+
 Route::get('/profile/project/edit/{project}', 'ProfileController@editProject')
     ->name('profile.project.edit')
     ->middleware(['auth', 'can:edit,project']);
@@ -150,6 +158,13 @@ Route::get('/profile/project/edit/{project}', 'ProfileController@editProject')
 Route::put('/profile/update/{user}', 'ProfileController@update')
     ->name('profile.update')
     ->middleware(['auth', 'can:update,user']);
+
+
+
+// Comment routes
+Route::post('/comment/store/{project}', 'CommentController@store')
+    ->name('comment.store')
+    ->middleware(['auth']);
 
 Auth::routes();
 

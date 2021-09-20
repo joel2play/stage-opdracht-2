@@ -99,6 +99,53 @@
                 
             </div>
         </div>
+
+        <div class="bg-white border rounded w-100 mx-auto mt-5 p-5">
+            <div>
+                <h3>
+                    Comments
+                </h3>
+            </div>
+            <div class="pt-5">
+                <form action="{{ route('comment.store', $project) }}" method="POST">
+                    @csrf
+
+                    <div class="form-group">
+                        <label>
+                            Comment
+                        </label>
+
+                        <textarea name="content" class="ckeditor"></textarea>
+
+                        <button class="btn btn-success mt-4">
+                            Post
+                        </button>
+                    </div>
+
+                </form>
+
+                @if($project->users->isEmpty())
+                    <p class="text-center w-100">
+                        No comments yet
+                    </p>
+                @else
+                    @foreach ($project->comments as $comment)
+                        <div class="card p-4 mb-5">
+                            <div class="mb-3">
+                                <img src="{{ asset('images/'. $comment->user->profile_picture) }}" class="rounded-circle" style="width: 50px">
+                                <a href="{{ route('profile.show', $comment->user) }}">
+                                    {{ $comment->user->name }}
+                                </a>
+                            </div>
+                            <div>
+                                {!! $comment->content !!}
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+                
+            </div>
+        </div>
     </div>
 
     @endsection

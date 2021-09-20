@@ -8,7 +8,7 @@
                 Projects
             </h3>
 
-            <a class="btn btn-success px-4 py-3 font-weight-bold" href="{{ route('project.create') }}">
+            <a class="btn btn-success px-4 py-3 font-weight-bold" href="{{ route('profile.project.create') }}">
                 Start a Project
             </a>
         </div>
