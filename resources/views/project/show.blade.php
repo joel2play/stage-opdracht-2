@@ -46,13 +46,22 @@
                                 Join this Project
                             </button>
                         </form>
-                    @else
-                    <form action="{{ route('project.leave', $project) }}" method="post">
-                        @csrf
-                        <button class="btn btn-danger">
-                            leave this Project
-                        </button>
-                    </form>
+                    
+                    @elsecan('leave', $project) 
+                        <form action="{{ route('project.leave', $project) }}" method="post">
+                            @csrf
+                            <button class="btn btn-danger">
+                                Leave this Project
+                            </button>
+                        </form>
+                        
+                    @elsecan('delete', $project)
+                        <form action="{{ route('project.delete', $project) }}" method="post">
+                            @csrf
+                            <button class="btn btn-danger">
+                                Delete this Project
+                            </button>
+                        </form>
                     @endcan
                     
                 </div>
@@ -64,9 +73,7 @@
 
                     <div>
                         <span>Categories:</span>
-                        @foreach ($project->categories as $categorie)
-                            {{ $categorie->name }}    
-                        @endforeach
+                            {{ $project->categories->pluck('name')->join(', ') }}
                     </div>
                 </div>
             </div>

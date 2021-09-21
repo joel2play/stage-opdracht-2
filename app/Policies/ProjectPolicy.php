@@ -32,4 +32,8 @@ class ProjectPolicy
     public function join (User $auth, Project $project){
         return !$project->users->contains($auth);
     }
+
+    public function leave (User $auth, Project $project) {
+        return $project->users->contains($auth) && $project->project_leader_id != $auth->id;
+    }
 }

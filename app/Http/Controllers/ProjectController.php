@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreControllerRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Image;
 use App\Project;
@@ -38,22 +39,15 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreControllerRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|min:5|max:255',
-            'description' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'images' => 'required',
-            'images.*' => 'image',
+        $project = Project::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'project_leader_id' => Auth::id(),
         ]);
-
-        $validated['project_leader_id'] = Auth::user()->id;
-
-        $project = Project::create($validated);
-
-        $project->users()->attach(Auth::user());
 
         foreach ($request->images as $image){
             Image::create([
