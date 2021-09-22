@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 
-@section ('right')
+@section('right')
 
     <div class="d-flex justify-content-between align-items-center">
         <h4>
@@ -14,16 +14,16 @@
                 <td>
                     <strong>Name</strong>
                 </td>
-                
+
                 <td>
                     <strong>Email</strong>
                 </td>
-                
+
                 <td>
                     <strong>Role</strong>
                 </td>
             </thead>
-            
+
             <tbody>
                 @foreach ($users as $user)
                     <tr>
@@ -32,19 +32,19 @@
                                 {{ $user->name }}
                             </a>
                         </td>
-                        
+
                         <td class="pr-5">
                             {{ $user->email }}
                         </td>
-                        
+
                         <td class="pr-5">
                             {{ $user->role->name }}
                         </td>
-                        
+
                         <td class="px-2">
                             <a href="{{ route('user.edit', $user) }}" class="text-primary">Edit</a>
                         </td>
-                        
+
                         <td>
                             <form action="{{ route('user.delete', $user) }}" method="post">
                                 @csrf

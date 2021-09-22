@@ -21,22 +21,23 @@ class UserPolicy
         //
     }
 
-    public function seeAdmin (User $auth){
-        return $auth->id == Role::ADMIN;
-    }
-
-    public function store (User $auth){
+    public function seeAdmin(User $auth)
+    {
         return $auth->role_id == Role::ADMIN;
     }
 
-    public function edit(User $auth, User $user){
+    public function store(User $auth)
+    {
+        return $auth->role_id == Role::ADMIN;
+    }
+
+    public function edit(User $auth, User $user)
+    {
         return $auth->id == $user->id || $auth->role_id == Role::ADMIN;
     }
 
-    public function update(User $auth, User $user){
+    public function update(User $auth, User $user)
+    {
         return $auth->id == $user->id || $auth->role_id == Role::ADMIN;
     }
-
-
-
 }

@@ -49,6 +49,8 @@ class ProjectController extends Controller
             'project_leader_id' => Auth::id(),
         ]);
 
+        $project->users()->attach(Auth::id());
+
         foreach ($request->images as $image){
             Image::create([
                 'file_name' => $image->store('projects'),
@@ -87,10 +89,6 @@ class ProjectController extends Controller
         return view('project.edit', compact('project'));
     }
 
-    public function overview (Project $project) {
-        return view('project.overview', compact('project'))->with('user', Auth::user());
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -115,7 +113,7 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect(route('project.index'));
+        return redirect(route('home'));
     }
 
     /**
@@ -130,9 +128,17 @@ class ProjectController extends Controller
             Storage::delete($image->file_name);
             $image->delete();
         }
+
+        $project->users()->detach();
+        $project->categories()->detach();
+
+        foreach($project->comments as $comment) {
+            $comment->delete();
+        }
+
         $project->delete();
 
-        return redirect(route('projects.index'));
+        return redirect(route('home'));
     }
 
     public function join (Project $project){

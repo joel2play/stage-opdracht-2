@@ -10,7 +10,8 @@ class Category extends Model
         'name',
     ];
 
-    public function projects (){
+    public function projects()
+    {
         return $this->hasMany(Project::class);
     }
 }

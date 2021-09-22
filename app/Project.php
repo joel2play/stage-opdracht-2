@@ -14,23 +14,28 @@ class Project extends Model
         'project_leader_id',
     ];
 
-    public function images () {
+    public function images()
+    {
         return $this->hasMany(Image::class);
     }
 
-    public function users (){
+    public function users()
+    {
         return $this->belongsToMany(User::class);
     }
 
-    public function categories (){
+    public function categories()
+    {
         return $this->belongsToMany(Category::class);
     }
 
-    public function comments () {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function project_leader() {
+    public function project_leader()
+    {
         return User::find($this->project_leader_id);
     }
 }

@@ -1,9 +1,7 @@
 <?php
 
 use App\Project;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,10 +45,6 @@ Route::post('/projects/store', 'ProjectController@store')
 Route::get('/projects/show/{project}', 'ProjectController@show')
     ->name('project.show')
     ->middleware(['auth']);
-
-Route::get('/project/overview/{project}', 'ProjectController@overview')
-    ->name('project.overview')
-    ->middleware(['auth', 'can:edit,project']);
 
 Route::get('/projects/edit/{project}', 'ProjectController@edit')
     ->name('project.edit')

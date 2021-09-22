@@ -21,19 +21,23 @@ class ProjectPolicy
         //
     }
 
-    public function edit (User $auth, Project $project) {
+    public function edit(User $auth, Project $project)
+    {
         return $auth->role_id == Role::ADMIN || $project->project_leader_id == $auth->id;
     }
 
-    public function delete (User $auth, Project $project) {
+    public function delete(User $auth, Project $project)
+    {
         return $auth->role_id == Role::ADMIN || $project->project_leader_id == $auth->id;
     }
 
-    public function join (User $auth, Project $project){
+    public function join(User $auth, Project $project)
+    {
         return !$project->users->contains($auth);
     }
 
-    public function leave (User $auth, Project $project) {
+    public function leave(User $auth, Project $project)
+    {
         return $project->users->contains($auth) && $project->project_leader_id != $auth->id;
     }
 }

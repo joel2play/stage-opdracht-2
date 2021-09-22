@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 
-@section ('right')
+@section('right')
 
     <div class="d-flex justify-content-between align-items-center">
         <h4>
@@ -15,7 +15,7 @@
                     <strong>Name</strong>
                 </td>
             </thead>
-            
+
             <tbody>
                 @foreach ($categories as $category)
                     <tr>

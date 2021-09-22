@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 
-@section ('right')
+@section('right')
 
     <div class="d-flex justify-content-between align-items-center">
         <h4>
@@ -14,20 +14,20 @@
                 <td>
                     <strong>Name</strong>
                 </td>
-                
+
                 <td>
                     <strong>Project leader</strong>
                 </td>
-                
+
                 <td>
                     <strong>Start date</strong>
                 </td>
-                
+
                 <td>
                     <strong>End Date</strong>
                 </td>
             </thead>
-            
+
             <tbody>
                 @foreach ($projects as $project)
                     <tr>
@@ -36,7 +36,8 @@
                         </td>
 
                         <td class="pr-5">
-                            {{ $project->project_leader()->name }}
+                            <a
+                                href="{{ route('profile.show', $project->project_leader()) }}"></a>{{ $project->project_leader()->name }}
                         </td>
 
                         <td class="pr-5">

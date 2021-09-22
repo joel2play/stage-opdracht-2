@@ -33,7 +33,7 @@ class ProfileController extends Controller
     }
 
     public function projects(User $user){
-        $projects = $user->projects->where('project_leader_id', $user->id);
+        $projects = $user->projects->where('project_leader_id', $user->id)->sortByDesc('created_at');
         return view('profile.project.index', compact('projects'))->with('user', $user);
     }
 
